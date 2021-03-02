@@ -10,10 +10,10 @@
 clear
 # Query if they need current user to have sudo permissions
 echo "Does this user require sudo privilages to be added? yes or no"
-read premissions
+read permissions
 echo "Installing lsb-release"
 su - -c 'apt install -y lsb-release'
-disto=$(lsb_release -is)
+distro=$(lsb_release -is)
 export currentuser=$(pwd | cut -d/ -f3)
 if [ $distro = Debian ]; then
 clear
@@ -38,13 +38,39 @@ su - -c 'apt update && apt -y upgrade && apt install -y firmware-linux firmware-
 su - -c 'apt update'
 su - -c 'apt -y upgrade'
 su - -c 'apt install -y remmina dnsutils screen'
-elif $distro = Ubuntu
+cd /home/${currentuser}/Downloads
+wget https://release.gitkraken.com/linux/gitkraken-amd64.deb
+su - -c 'apt install -y ./gitkraken-amd64.deb'
+elif [ $distro = Ubuntu ]; then
 clear 
 echo "Running for Ubuntu" && echo "updating and upgrading and installing tools" && sleep 1
 # install remmina
 su - -c 'apt-add-repository ppa:remmina-ppa-team/remmina-next'
 su - -c 'apt update && apt -y upgrade'
 su - -c 'apt install -y remmina remmina-plugin-rdp remmina-plugin-secret dnsutils screen'
+cd /home/${currentuser}/Downloads
+wget https://release.gitkraken.com/linux/gitkraken-amd64.deb
+su - -c 'apt install -y ./gitkraken-amd64.deb'
+elif [ $distro = Linuxmint ]; then
+clear 
+echo "Running for Linux Mint" && echo "updating and upgrading and installing tools" && sleep 1
+# install remmina
+su - -c 'apt-add-repository ppa:remmina-ppa-team/remmina-next'
+su - -c 'apt update && apt -y upgrade'
+su - -c 'apt install -y remmina remmina-plugin-rdp remmina-plugin-secret dnsutils screen'
+cd /home/${currentuser}/Downloads
+wget https://release.gitkraken.com/linux/gitkraken-amd64.deb
+su - -c 'apt install -y ./gitkraken-amd64.deb'
+elif [ $distro = Sparky ]; then
+clear 
+echo "Running for Sparky" && echo "updating and upgrading and installing tools" && sleep 1
+# install remmina
+su - -c 'apt-add-repository ppa:remmina-ppa-team/remmina-next'
+su - -c 'apt update && apt -y upgrade'
+su - -c 'apt install -y remmina remmina-plugin-rdp remmina-plugin-secret dnsutils screen'
+cd /home/${currentuser}/Downloads
+wget https://release.gitkraken.com/linux/gitkraken-amd64.deb
+su - -c 'apt install -y ./gitkraken-amd64.deb'
 else
 clear
 echo " Runing for unknown Distro" && echo "installing dnsutils and screen"
